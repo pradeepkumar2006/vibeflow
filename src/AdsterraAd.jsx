@@ -1,45 +1,57 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 
 export default function AdsterraAd({ adKey, width, height }) {
-  const adRef = useRef(null);
-
-  useEffect(() => {
-    if (!adRef.current) return;
-
-    // Clear any existing children to prevent duplicate ads
-    adRef.current.innerHTML = "";
-
-    const optionsScript = document.createElement("script");
-    optionsScript.type = "text/javascript";
-    optionsScript.innerHTML = `
-      atOptions = {
-        'key' : '${adKey}',
-        'format' : 'iframe',
-        'height' : ${height},
-        'width' : ${width},
-        'params' : {}
-      };
-    `;
-
-    const invokeScript = document.createElement("script");
-    invokeScript.type = "text/javascript";
-    invokeScript.async = true;
-    invokeScript.src = `//www.highperformanceformat.com/${adKey}/invoke.js`;
-
-    adRef.current.appendChild(optionsScript);
-    adRef.current.appendChild(invokeScript);
-  }, [adKey, width, height]);
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; background: transparent; overflow: hidden; }
+        </style>
+      </head>
+      <body>
+        <script>
+          var atOptions = {
+            'key' : '${adKey}',
+            'format' : 'iframe',
+            'height' : ${height},
+            'width' : ${width},
+            'params' : {}
+          };
+        </script>
+        <script src="https://www.highperformanceformat.com/${adKey}/invoke.js"></script>
+      </body>
+    </html>
+  `;
 
   return (
     <div
-      ref={adRef}
+      className="ad-container"
       style={{
-        width: `${width}px`,
-        height: `${height}px`,
+        display: "flex",
+        justifyContent: "center",
         margin: "20px auto",
-        textAlign: "center",
-        overflow: "hidden"
+        width: "100%",
+        overflowX: "auto",
+        textAlign: "center"
       }}
-    />
+    >
+      <iframe
+        title={`Ad-${width}x${height}`}
+        srcDoc={htmlContent}
+        width={width}
+        height={height}
+        frameBorder="0"
+        scrolling="no"
+        style={{
+          border: "none",
+          width: `${width}px`,
+          height: `${height}px`,
+          maxWidth: "100%",
+          display: "block"
+        }}
+      ></iframe>
+    </div>
   );
 }
