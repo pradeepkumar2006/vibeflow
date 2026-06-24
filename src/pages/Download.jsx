@@ -18,19 +18,29 @@ export default function DownloadPage() {
   const handleDownload = (e) => {
     e.preventDefault();
     
-    // Show download notification
+    // Show download notification immediately on the website
     setShowNotification(true);
     setTimeout(() => setShowNotification(false), 4000);
     
-    // ACTION 1: Open the APK download in a new tab
-    // This allows the browser to show the download prompt safely
-    window.open('/vibeflow-app.apk', '_blank');
+    // ACTION 1: Trigger the APK download immediately.
+    // This ensures the App downloads FIRST without any interruptions.
+    window.location.href = '/vibeflow-app.apk';
     
-    // ACTION 2: Redirect the current tab to the Adsterra Direct Link
-    // We redirect the current tab to the ad, so the download is not interrupted
+    // ACTION 2: Setup the Ad to open on the user's NEXT click.
+    // Since we cannot open ads with a delay (popup blockers will block it),
+    // we wait for the user to touch or click the screen again, and THEN open the Ad.
     setTimeout(() => {
-      window.location.href = 'https://www.effectivecpmnetwork.com/jri62sx0yf?key=a3f84b05ab45d565a01200c9ced6d7c4';
-    }, 100);
+      const openAdOnNextClick = () => {
+        window.open('https://www.effectivecpmnetwork.com/jri62sx0yf?key=a3f84b05ab45d565a01200c9ced6d7c4', '_blank');
+        // Clean up so the ad only opens once
+        document.removeEventListener('click', openAdOnNextClick);
+        document.removeEventListener('touchstart', openAdOnNextClick);
+      };
+      
+      // Listen for the very next touch or click anywhere on the page
+      document.addEventListener('click', openAdOnNextClick);
+      document.addEventListener('touchstart', openAdOnNextClick, { passive: true });
+    }, 500); // 500ms delay to prevent the current download click from triggering the ad
   };
 
   return (
