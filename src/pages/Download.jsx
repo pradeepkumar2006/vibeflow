@@ -25,22 +25,6 @@ export default function DownloadPage() {
     // ACTION 1: Trigger the APK download immediately.
     // This ensures the App downloads FIRST without any interruptions.
     window.location.href = '/vibeflow-app.apk';
-    
-    // ACTION 2: Setup the Ad to open on the user's NEXT click.
-    // Since we cannot open ads with a delay (popup blockers will block it),
-    // we wait for the user to touch or click the screen again, and THEN open the Ad.
-    setTimeout(() => {
-      const openAdOnNextClick = () => {
-        window.open('https://www.effectivecpmnetwork.com/jri62sx0yf?key=a3f84b05ab45d565a01200c9ced6d7c4', '_blank');
-        // Clean up so the ad only opens once
-        document.removeEventListener('click', openAdOnNextClick);
-        document.removeEventListener('touchstart', openAdOnNextClick);
-      };
-      
-      // Listen for the very next touch or click anywhere on the page
-      document.addEventListener('click', openAdOnNextClick);
-      document.addEventListener('touchstart', openAdOnNextClick, { passive: true });
-    }, 500); // 500ms delay to prevent the current download click from triggering the ad
   };
 
   return (
