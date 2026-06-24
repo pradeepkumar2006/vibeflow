@@ -22,12 +22,15 @@ export default function DownloadPage() {
     setShowNotification(true);
     setTimeout(() => setShowNotification(false), 4000);
     
-    // ACTION 1: Open the Adsterra Direct Link (Popunder) in a new tab
-    // We do this first so it's tied to the user's synchronous click action
-    window.open('https://www.effectivecpmnetwork.com/jri62sx0yf?key=a3f84b05ab45d565a01200c9ced6d7c4', '_blank');
+    // ACTION 1: Open the APK download in a new tab
+    // This allows the browser to show the download prompt safely
+    window.open('/vibeflow-app.apk', '_blank');
     
-    // ACTION 2: Trigger the actual APK download immediately in the current tab
-    window.location.href = '/vibeflow-app.apk';
+    // ACTION 2: Redirect the current tab to the Adsterra Direct Link
+    // We redirect the current tab to the ad, so the download is not interrupted
+    setTimeout(() => {
+      window.location.href = 'https://www.effectivecpmnetwork.com/jri62sx0yf?key=a3f84b05ab45d565a01200c9ced6d7c4';
+    }, 100);
   };
 
   return (
