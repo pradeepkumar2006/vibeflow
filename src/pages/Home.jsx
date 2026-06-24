@@ -81,7 +81,12 @@ export default function Home() {
       {/* App Promo Image Section */}
       <section style={{ padding: '0 0 4rem', background: '#f8f9fa', textAlign: 'center' }}>
         <div className="container">
-          <img src="/about-mockup.png" alt="Vibeflow Features Presentation" className="animate-fade-up" style={{ width: '100%', maxWidth: '1000px', height: 'auto', borderRadius: '20px', mixBlendMode: 'multiply' }} />
+          <img src="/about-mockup.png" alt="Vibeflow Features Presentation" className="animate-fade-up" style={{ width: '100%', maxWidth: '1000px', height: 'auto', borderRadius: '20px', mixBlendMode: 'multiply', marginBottom: '2rem' }} />
+          
+          {/* Ad Placement 2: Below Screenshot */}
+          <div className="animate-fade-up delay-1">
+            <AdsterraAd adKey="b06c26d7d008ec675847a73837f673ab" width={300} height={250} />
+          </div>
         </div>
       </section>
 
