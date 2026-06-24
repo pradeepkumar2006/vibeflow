@@ -17,8 +17,7 @@ export default function DownloadPage() {
     e.preventDefault();
     
     // ACTION 1: Open the Adsterra Direct Link (Popunder) in a new tab
-    // REPLACE the URL below with your actual Adsterra Direct Link once you create it!
-    window.open('https://www.profitablecpmrate.com/YOUR_LINK_ID', '_blank');
+    window.open('https://www.effectivecpmnetwork.com/jri62sx0yf?key=a3f84b05ab45d565a01200c9ced6d7c4', '_blank');
     
     // ACTION 2: Trigger the actual APK download
     setTimeout(() => {
