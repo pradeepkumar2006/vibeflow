@@ -5,14 +5,17 @@ import { HelmetProvider } from 'react-helmet-async'
 import { Analytics } from '@vercel/analytics/react'
 import './index.css'
 import App from './App.jsx'
+import { AdProvider } from './context/AdContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HelmetProvider>
-      <HashRouter>
-        <App />
-        <Analytics />
-      </HashRouter>
+      <AdProvider>
+        <HashRouter>
+          <App />
+          <Analytics />
+        </HashRouter>
+      </AdProvider>
     </HelmetProvider>
   </StrictMode>,
 )

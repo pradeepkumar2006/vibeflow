@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ArrowUp } from 'lucide-react';
+import { Menu, X, ArrowUp, Shield, ShieldAlert } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAdContext } from '../context/AdContext';
 
 export default function Layout({ children }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const location = useLocation();
+  const { isFamilyMode, toggleFamilyMode } = useAdContext();
 
   useEffect(() => {
     const handleScroll = () => setShowScrollTop(window.scrollY > 300);
@@ -39,6 +41,22 @@ export default function Layout({ children }) {
             <Link to="/about" style={{ textDecoration: 'none', color: 'var(--text-main)', fontWeight: '600' }}>About Us</Link>
             <Link to="/download" style={{ textDecoration: 'none', color: 'var(--text-main)', fontWeight: '600' }}>Download</Link>
             <Link to="/contact" style={{ textDecoration: 'none', color: 'var(--text-main)', fontWeight: '600' }}>Contact</Link>
+            
+            <button 
+              onClick={toggleFamilyMode}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '8px', 
+                background: isFamilyMode ? '#10B981' : 'transparent', 
+                color: isFamilyMode ? 'white' : 'var(--text-main)',
+                border: `1px solid ${isFamilyMode ? '#10B981' : 'var(--text-muted)'}`,
+                padding: '6px 12px', borderRadius: '20px', cursor: 'pointer',
+                fontWeight: '600', transition: 'all 0.3s ease'
+              }}
+              title={isFamilyMode ? "Family Mode ON (Ads Hidden)" : "Family Mode OFF"}
+            >
+              {isFamilyMode ? <Shield size={16} /> : <ShieldAlert size={16} />}
+              {isFamilyMode ? 'Safe Mode' : 'Ads Mode'}
+            </button>
           </div>
           <div className="mobile-menu-btn" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <div onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} style={{ cursor: 'pointer', color: 'var(--text-main)' }}>
@@ -55,6 +73,16 @@ export default function Layout({ children }) {
           <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
           <Link to="/download" onClick={() => setIsMobileMenuOpen(false)}>Download</Link>
           <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
+          <div 
+            onClick={() => { toggleFamilyMode(); setIsMobileMenuOpen(false); }}
+            style={{ 
+              padding: '1rem 0', color: isFamilyMode ? '#10B981' : 'var(--text-main)', 
+              fontWeight: '600', display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' 
+            }}
+          >
+            {isFamilyMode ? <Shield size={20} /> : <ShieldAlert size={20} />}
+            {isFamilyMode ? 'Safe Mode (Ads Hidden)' : 'Turn On Safe Mode'}
+          </div>
         </div>
       )}
 

@@ -42,8 +42,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Ad: Native Banner */}
-      <AdsterraAd type="native" />
 
       {/* Features Preview Section */}
       <section className="features">
@@ -77,6 +75,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Ad: Native Banner (Moved below the fold) */}
+      <AdsterraAd type="native" />
 
       {/* App Promo Image Section */}
       <section style={{ padding: '0 0 4rem', background: '#f8f9fa', textAlign: 'center' }}>
