@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function AdsterraAd({ type, adKey, width, height }) {
+  const nativeRef = useRef(null);
+
+  useEffect(() => {
+    // Inject Native Ad script dynamically
+    if (type === 'native' && !document.getElementById('adsterra-native-script')) {
+      const script = document.createElement('script');
+      script.id = 'adsterra-native-script';
+      script.async = true;
+      script.setAttribute('data-cfasync', 'false');
+      script.src = '//pl29879136.effectivecpmnetwork.com/8455a8683ada6701da13e3ed06fd93f9/invoke.js';
+      document.body.appendChild(script);
+    }
+  }, [type]);
+
   if (type === 'native') {
     return (
       <div className="ad-container" style={{ display: 'flex', justifyContent: 'center', margin: '20px 0', width: '100%' }}>
-        <iframe 
-          title="Native Ad"
-          src="/ad.html?type=native" 
-          width="100%" 
-          height={height || 350} 
-          frameBorder="0" 
-          scrolling="no" 
-          style={{ border: 'none', maxWidth: '800px' }}
-        ></iframe>
+        <div id="container-8455a8683ada6701da13e3ed06fd93f9" ref={nativeRef}></div>
       </div>
     );
   }
 
-  // Banner Ads
+  // Banner Ads use iframe to avoid document.write issues, and have fixed heights
   return (
     <div className="ad-container" style={{ display: 'flex', justifyContent: 'center', margin: '20px 0', width: '100%', overflowX: 'auto' }}>
       <iframe 
