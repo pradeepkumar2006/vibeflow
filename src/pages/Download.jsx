@@ -1,9 +1,11 @@
 
-import { Download, Zap, Shield, Heart } from 'lucide-react';
+import { useState } from 'react';
+import { Download, Zap, Shield, Heart, CheckCircle2 } from 'lucide-react';
 import SEO from '../components/SEO';
 import AdsterraAd from '../AdsterraAd';
 
 export default function DownloadPage() {
+  const [showNotification, setShowNotification] = useState(false);
   const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://astravibeflow.dpdns.org/download';
   
   const shareLinks = {
@@ -16,13 +18,16 @@ export default function DownloadPage() {
   const handleDownload = (e) => {
     e.preventDefault();
     
+    // Show download notification
+    setShowNotification(true);
+    setTimeout(() => setShowNotification(false), 4000);
+    
     // ACTION 1: Open the Adsterra Direct Link (Popunder) in a new tab
+    // We do this first so it's tied to the user's synchronous click action
     window.open('https://www.effectivecpmnetwork.com/jri62sx0yf?key=a3f84b05ab45d565a01200c9ced6d7c4', '_blank');
     
-    // ACTION 2: Trigger the actual APK download
-    setTimeout(() => {
-      window.location.href = '/vibeflow-app.apk';
-    }, 100);
+    // ACTION 2: Trigger the actual APK download immediately in the current tab
+    window.location.href = '/vibeflow-app.apk';
   };
 
   return (
@@ -32,6 +37,38 @@ export default function DownloadPage() {
         description="Download the latest version of Vibeflow for Android. The best free, open audio streaming app with zero interruptions."
       />
       
+      {/* Top Notification */}
+      {showNotification && (
+        <div style={{
+          position: 'fixed',
+          top: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: '#10B981', // Tailwind emerald-500
+          color: 'white',
+          padding: '12px 24px',
+          borderRadius: '50px',
+          boxShadow: '0 10px 25px rgba(16, 185, 129, 0.4)',
+          zIndex: 9999,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          fontWeight: '500',
+          animation: 'slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}>
+          <CheckCircle2 size={20} />
+          <span>Download started! Check your notification panel.</span>
+        </div>
+      )}
+
+      {/* Add a simple animation style to the page for the notification */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes slideDown {
+          0% { transform: translate(-50%, -100%); opacity: 0; }
+          100% { transform: translate(-50%, 0); opacity: 1; }
+        }
+      `}} />
+
       <section className="features" style={{ paddingTop: '2rem' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           
@@ -40,33 +77,35 @@ export default function DownloadPage() {
             <p>Get the ultimate music streaming experience on your Android device today.</p>
           </div>
 
-          <div className="glass-panel animate-fade-up delay-1" style={{ maxWidth: '800px', margin: '0 auto 3rem', padding: '3rem 2rem', background: '#ffffff', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
+          {/* Side-by-Side Layout for Desktop */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', justifyContent: 'center', alignItems: 'stretch', margin: '0 auto 3rem', maxWidth: '1000px' }}>
             
-            <h2 style={{ marginBottom: '2rem' }}>Ready to Install?</h2>
-            
-            <div style={{ marginBottom: '1rem' }}>
-              <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem' }}>
-                Step 1: Please support us by viewing our sponsors.
+            {/* Main Download Box */}
+            <div className="glass-panel animate-fade-up delay-1" style={{ flex: '1 1 500px', padding: '3rem 2rem', background: '#ffffff', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              
+              <h2 style={{ marginBottom: '1.5rem' }}>Ready to Install?</h2>
+              <p style={{ color: 'var(--text-muted)', marginBottom: '2.5rem', fontSize: '1.1rem' }}>
+                Click the button below to get your file instantly.
               </p>
+              
+              <div id="download-final">
+                <button onClick={handleDownload} className="btn btn-primary hover-scale" style={{ fontSize: '1.2rem', padding: '1rem 3rem', border: 'none', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+                  <Download size={28} />
+                  Download APK
+                </button>
+                <p style={{ marginTop: '1.5rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                  Version 1.0.0 • Size: ~15MB • Safe & Secure
+                </p>
+              </div>
             </div>
 
-            {/* Specific Ad Placement: 300x250 Ad */}
-            <div style={{ margin: '1rem 0 2rem 0', padding: '1rem', background: '#f8f9fa', borderRadius: '15px' }}>
-              <p style={{ fontSize: '0.8rem', color: '#aaa', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '10px' }}>Advertisement</p>
-              <AdsterraAd adKey="b06c26d7d008ec675847a73837f673ab" width={300} height={250} />
-            </div>
-
-            <div id="download-final">
-              <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '1.1rem' }}>
-                Step 2: Download your file.
-              </p>
-              <button onClick={handleDownload} className="btn btn-primary" style={{ fontSize: '1.2rem', padding: '1rem 3rem', border: 'none', cursor: 'pointer' }}>
-                <Download size={28} />
-                Download APK
-              </button>
-              <p style={{ marginTop: '1rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                Version 1.0.0 • Size: ~15MB • Safe & Secure
-              </p>
+            {/* Side Ad Column */}
+            <div className="glass-panel animate-fade-up delay-1" style={{ flex: '0 1 340px', padding: '1.5rem', background: '#ffffff', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <p style={{ fontSize: '0.75rem', color: '#aaa', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '15px' }}>Advertisement</p>
+              <div style={{ background: '#f8f9fa', padding: '10px', borderRadius: '12px' }}>
+                <AdsterraAd adKey="b06c26d7d008ec675847a73837f673ab" width={300} height={250} />
+              </div>
+              <p style={{ fontSize: '0.8rem', color: '#aaa', marginTop: '15px' }}>Support us by viewing sponsors</p>
             </div>
 
           </div>
