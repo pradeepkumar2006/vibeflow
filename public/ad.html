@@ -37,20 +37,10 @@
   </script>
 
   <script>
-    // Continuously check if the ad has rendered something
-    let checks = 0;
-    const interval = setInterval(() => {
-      const iframes = document.getElementsByTagName('iframe');
-      // If Adsterra injected an iframe, it means the ad loaded
-      if (iframes.length > 0) {
-        window.parent.postMessage({ type: 'AD_LOADED', key: adKey }, '*');
-        clearInterval(interval);
-      }
-      
-      checks++;
-      if (checks > 10) { // Give up after 5 seconds
-        clearInterval(interval);
-      }
+    // Always send AD_LOADED so React opens the space for the ad to load.
+    // If Adsterra is slow or uses divs instead of iframes, we still show the box.
+    setTimeout(() => {
+      window.parent.postMessage({ type: 'AD_LOADED', key: adKey }, '*');
     }, 500);
   </script>
 </body>
