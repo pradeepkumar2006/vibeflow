@@ -84,7 +84,7 @@ export default function Layout({ children }) {
             <div>
               <h4 style={{ marginBottom: '1rem', fontSize: '1.2rem', color: '#fff' }}>Support & Legal</h4>
               <p style={{ color: '#a0a0a0', fontSize: '0.95rem', marginBottom: '0.8rem' }}>
-                Email: <a href="mailto:pradeepkumarcb18s@gmail.com" style={{ color: '#4facfe', textDecoration: 'none' }}>pradeepkumarcb18s@gmail.com</a>
+                Email: <a href="mailto:pradeepkumarcb18s@gmail.com" style={{ color: '#4facfe', textDecoration: 'none' }}>Astraardency@gmail.com</a>
               </p>
               <p style={{ color: '#a0a0a0', fontSize: '0.95rem', marginBottom: '0.8rem' }}>
                 <Link to="/about#dmca" style={{ color: '#a0a0a0', textDecoration: 'none' }}>DMCA & Copyright Policy</Link>
