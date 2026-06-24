@@ -13,6 +13,19 @@ export default function DownloadPage() {
     reddit: `https://reddit.com/submit?url=${encodeURIComponent(currentUrl)}&title=Download%20Vibeflow%20-%20Free%20Music%20App`,
   };
 
+  const handleDownload = (e) => {
+    e.preventDefault();
+    
+    // ACTION 1: Open the Adsterra Direct Link (Popunder) in a new tab
+    // REPLACE the URL below with your actual Adsterra Direct Link once you create it!
+    window.open('https://www.profitablecpmrate.com/YOUR_LINK_ID', '_blank');
+    
+    // ACTION 2: Trigger the actual APK download
+    setTimeout(() => {
+      window.location.href = '/vibeflow-app.apk';
+    }, 100);
+  };
+
   return (
     <>
       <SEO 
@@ -48,10 +61,10 @@ export default function DownloadPage() {
               <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '1.1rem' }}>
                 Step 2: Download your file.
               </p>
-              <a href="/vibeflow-app.apk" download className="btn btn-primary" style={{ fontSize: '1.2rem', padding: '1rem 3rem' }}>
+              <button onClick={handleDownload} className="btn btn-primary" style={{ fontSize: '1.2rem', padding: '1rem 3rem', border: 'none', cursor: 'pointer' }}>
                 <Download size={28} />
                 Download APK
-              </a>
+              </button>
               <p style={{ marginTop: '1rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
                 Version 1.0.0 • Size: ~15MB • Safe & Secure
               </p>
