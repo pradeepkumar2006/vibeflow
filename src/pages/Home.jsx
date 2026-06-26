@@ -16,7 +16,7 @@ export default function Home() {
       <section className="hero" style={{ marginTop: '-80px' }}>
         <div className="hero-bg"></div>
         <div className="container hero-content">
-          <div className="hero-text animate-fade-up">
+          <div className="hero-text">
             <h1>Feel the Music <span className="gradient-text">Find your Vibe.</span></h1>
             <p>Welcome to Vibeflow – a completely free, seamless, and open audio streaming experience. Dive into all language songs available up-to-date.</p>
             
@@ -34,7 +34,7 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="hero-image animate-fade-up delay-1">
+          <div className="hero-image">
             <div className="hero-image-wrapper">
               <img src="/hero-mockup.jpg" alt="Vibeflow App Preview" style={{ width: '100%', maxWidth: '650px', height: 'auto', mixBlendMode: 'multiply', filter: 'contrast(1.02)' }} />
             </div>
