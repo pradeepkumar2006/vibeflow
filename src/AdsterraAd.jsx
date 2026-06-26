@@ -6,6 +6,8 @@ export default function AdsterraAd({ type, adKey, width, height }) {
   const nativeRef = useRef(null);
   const { isFamilyMode } = useAdContext();
 
+  return null; // TEMPORARILY DISABLED FOR GOOGLE INDEXING
+
   useEffect(() => {
     // Inject Native Ad script dynamically if not in Family Mode
     if (!isFamilyMode && type === 'native' && !document.getElementById('adsterra-native-script')) {
